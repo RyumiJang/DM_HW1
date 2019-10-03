@@ -96,88 +96,51 @@ int main(){
 
   //4.Check continous number
 
-  //check whether there is a previous number
-/*
-  fprintf(fp,"(aseert (and \n");
-  for(n = 1; n <= row; n++){
-    for(m = 1; m <= col; m++){
-      fprintf(fp, "(and\n (or (= a%d%d 1)",n,m);
-
-      if(1 <= n-1)
-        fprintf(fp,"(= a%d%d (+ a%d%d 1)) ",n,m,n-1,m);
-      if(n+1 <= row)
-        fprintf(fp,"(= a%d%d (+ a%d%d 1)) ",n,m,n+1,m);
-      if(1 <= m-1)
-        fprintf(fp,"(= a%d%d (+ a%d%d 1)) ",n,m,n,m-1);
-      if(m+1 <= col)
-        fprintf(fp,"(= a%d%d (+ a%d%d 1)) ",n,m,n,m+1);
-
-      fprintf(fp,") (or (= a%d%d %d)",n,m,max);
-
-      if(1 <= n-1)
-        fprintf(fp,"(= a%d%d (- a%d%d 1)) ",n,m,n-1,m);
-      if(n+1 <= row)
-        fprintf(fp,"(= a%d%d (- a%d%d 1)) ",n,m,n+1,m);
-      if(1 <= m-1)
-        fprintf(fp,"(= a%d%d (- a%d%d 1)) ",n,m,n,m-1);
-      if(m+1 <= col)
-        fprintf(fp,"(= a%d%d (- a%d%d 1)) ",n,m,n,m+1);
-
-
-      fprintf(fp,") )\n");
-    }
-  }
-  fprintf(fp,"))\n");
-*/
-
-  //check whether there is a previous number
-  //fprintf(fp,"(aseert (and \n");
   for(n = 1; n <= row; n++){
     for(m = 1; m <= col; m++){
       fprintf(fp, "(assert (and ");
 
       if((n == 1) && (m == 1)){
-      fprintf(fp,"(or (= (- a11 a12) 1) (= (- a11 a21) 1)) (or (= (- a11 a12) -1) (= (- a11 a21) -1))");
+      fprintf(fp,"(or (= a11 1) (= (- a11 a12) 1) (= (- a11 a21) 1)) (or (= a11 %d) (= (- a11 a12) -1) (= (- a11 a21) -1))",max);
       }
 
       if((n == 1) && (m == row)){
-      fprintf(fp,"(or (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= (- a%d%d %d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n+1,m,n,m,n,m-1,n,m,n+1,m,n,m,n,m-1);
+      fprintf(fp,"(or (= a%d%d 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= a%d%d %d) (= (- a%d%d %d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m,n+1,m,n,m,n,m-1,n,m,max,n,m,n+1,m,n,m,n,m-1);
       }
 
        if((n == col) && (m == 1)){
-      fprintf(fp,"(or (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n-1,m,n,m,n,m+1,n,m,n-1,m,n,m,n,m+1);
+      fprintf(fp,"(or (= a%d%d 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= a%d%d %d) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m,n-1,m,n,m,n,m+1,n,m,max,n,m,n-1,m,n,m,n,m+1);
       }
 
       if((n == row) && (m == col)){
-      fprintf(fp,"(or (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m-1,n,m,n-1,m,n,m,n,m-1,n,m,n-1,m);
+      fprintf(fp,"(or (= a%d%d 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= a%d%d %d) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m,n,m-1,n,m,n-1,m,n,m,max,n,m,n,m-1,n,m,n-1,m);
       }
 
 
       if((1 < n) && (n < row) && (m == 1)){
-      fprintf(fp,"(or (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n-1,m,n,m,n,m+1,n,m,n+1,m,n,m,n-1,m,n,m,n,m+1,n,m,n+1,m);
+      fprintf(fp,"(or (= a%d%d 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= a%d%d %d) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m,n-1,m,n,m,n,m+1,n,m,n+1,m,n,m,max,n,m,n-1,m,n,m,n,m+1,n,m,n+1,m);
       }
 
       if((n == 1) && (1 < m) && (m < col)){
-      fprintf(fp,"(or (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m-1,n,m,n+1,m,n,m,n,m+1,n,m,n,m-1,n,m,n+1,m,n,m,n,m+1);
+      fprintf(fp,"(or (= a%d%d 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= a%d%d %d) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m,n,m-1,n,m,n+1,m,n,m,n,m+1,n,m,max,n,m,n,m-1,n,m,n+1,m,n,m,n,m+1);
       }
 
       if((1 < n) && (n < row) && (m == col)){
-      fprintf(fp,"(or (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n-1,m,n,m,n,m-1,n,m,n+1,m,n,m,n-1,m,n,m,n,m-1,n,m,n+1,m);
+      fprintf(fp,"(or (= a%d%d 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= a%d%d %d) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m,n-1,m,n,m,n,m-1,n,m,n+1,m,n,m,max,n,m,n-1,m,n,m,n,m-1,n,m,n+1,m);
       }
 
       if((n == row) && (1 < m) && (m < col)){
-      fprintf(fp,"(or (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m-1,n,m,n-1,m,n,m,n,m+1,n,m,n,m-1,n,m,n-1,m,n,m,n,m+1);
+      fprintf(fp,"(or (= a%d%d 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= a%d%d %d) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m,n,m-1,n,m,n-1,m,n,m,n,m+1,n,m,max,n,m,n,m-1,n,m,n-1,m,n,m,n,m+1);
       }
 
       if((1 < n) && (n < row ) && (1 < m) && (m < col)){
-      fprintf(fp,"(or (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m-1,n,m,n-1,m,n,m,n,m+1,n,m,n+1,m,n,m,n,m-1,n,m,n-1,m,n,m,n,m+1,n,m,n+1,m);
+      fprintf(fp,"(or (= a%d%d 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1) (= (- a%d%d a%d%d) 1)) (or (= a%d%d %d) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1) (= (- a%d%d a%d%d) -1)) ",n,m,n,m,n,m-1,n,m,n-1,m,n,m,n,m+1,n,m,n+1,m,n,m,max,n,m,n,m-1,n,m,n-1,m,n,m,n,m+1,n,m,n+1,m);
       }
 
 
       fprintf(fp," ))\n");
     }
   }
-  //fprintf(fp,"))\n");
 
   fprintf(fp, "(check-sat)\n(get-model)\n");
   fclose(fp);
